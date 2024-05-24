@@ -7,7 +7,6 @@
 </template>
 
 <script setup>
-const status = ref('')
 const image = ref('')
 
 const route = useRoute()
@@ -21,7 +20,6 @@ onMounted(() => {
       const base64Response = await fetch(event.data.payload.image)
       const blob = await base64Response.blob()
 
-      status.value = 'done'
       image.value = URL.createObjectURL(blob)
     }
   })
