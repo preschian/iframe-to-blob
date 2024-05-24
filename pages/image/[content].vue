@@ -2,7 +2,7 @@
   <img v-if="image" :src="image" width="600" height="600" />
   <div v-else>
     <h3>Iframe:</h3>
-    <iframe :src="iframeUrl" frameborder="0" width="600" height="600"></iframe>
+    <iframe :src="iframeUrl" frameborder="0" width="300" height="300"></iframe>
   </div>
 </template>
 
@@ -29,7 +29,7 @@ onMounted(() => {
 </script>
 
 <style>
-body {
+* {
   margin: 0;
 }
 </style>
