@@ -1,5 +1,5 @@
 <template>
-  <img v-if="image" :src="image" width="600" height="600" />
+  <img v-if="image" :src="image" width="100%" height="100%" />
   <div v-else>
     <h3>Iframe:</h3>
     <iframe :src="iframeUrl" frameborder="0" width="300" height="300"></iframe>
@@ -29,5 +29,22 @@ onMounted(() => {
 <style>
 * {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
 }
 </style>
