@@ -2,7 +2,7 @@
   <img v-if="image" :src="image" width="100%" height="100%" />
   <div v-else>
     <h3>Iframe:</h3>
-    <iframe :src="iframeUrl" frameborder="0" width="600" height="600"></iframe>
+    <iframe :src="url?.toString()" frameborder="0" width="600" height="600"></iframe>
   </div>
 </template>
 
@@ -10,9 +10,7 @@
 const image = ref('')
 
 const route = useRoute()
-const { content } = route.params
-const { hash } = route.query
-const iframeUrl = `https://image.w.kodadot.xyz/ipfs/${content}/?hash=${hash}`
+const { url } = route.query
 
 onMounted(() => {
   window.addEventListener('message', async (event) => {
