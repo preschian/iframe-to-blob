@@ -1,7 +1,7 @@
 <template>
   <img v-if="image" :src="image" width="100%" height="100%" />
   <div v-else>
-    <h3>Iframe:</h3>
+    <h3>Loading...</h3>
     <iframe :src="url?.toString()" frameborder="0" width="600" height="600"></iframe>
   </div>
 </template>
