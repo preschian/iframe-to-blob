@@ -4,6 +4,7 @@ import { wss } from '~/utils/rpc'
 export default defineEventHandler(async (event) => {
   const chain = getRouterParam(event, 'chain')
   const collection = getRouterParam(event, 'collection')
+  const tokenId = getRouterParam(event, 'tokenId')
 
   if (chain !== 'ahp' && chain !== 'ahk') {
     throw new Error('Invalid chain')
@@ -16,14 +17,18 @@ export default defineEventHandler(async (event) => {
   const api = await ApiPromise.create({
     provider: new WsProvider(wss[chain]),
   })
-  const query = await api.query.nfts.collectionMetadataOf(collection)
-  const { data } = query.toHuman() as { data: string }
+  const list = await api.query.nfts.item.keys(collection)
+  // @ts-ignore
+  const ids = list.map((key) => key.toHuman()[1].replaceAll(',', ''))
   api.disconnect()
 
-  const cid = data.replace('ipfs://', '')
-  const ipfs = `https://image.w.kodadot.xyz/ipfs/${cid}`
-  const metadata = await fetch(ipfs)
-  const json = await metadata.json()
+  // get index from ids
+  const index = ids.findIndex((id) => id === tokenId)
 
-  return json
+  return {
+    chain,
+    collection,
+    tokenId,
+    index,
+  }
 })
