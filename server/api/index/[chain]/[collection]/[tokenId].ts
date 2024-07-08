@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
   })
   const list = await api.query.nfts.item.keys(collection)
   // @ts-ignore
-  const ids = list.map((key) => key.toHuman()[1].replaceAll(',', ''))
+  const ids = list.map((key) => key.toHuman()[1].replaceAll(',', '')).sort((a, b) => a - b)
   api.disconnect()
 
   // get index from ids
