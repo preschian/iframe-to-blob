@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
   api.disconnect()
 
   // get index from ids
-  const index = ids.findIndex((id) => id === tokenId)
+  const index = ids.findIndex((id) => id === tokenId) + 1
 
   return {
     chain,
